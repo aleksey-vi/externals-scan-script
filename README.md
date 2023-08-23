@@ -42,6 +42,13 @@ Installation via this method is standard:
 
 # Usage
 
+Using the script is extremely simple and intuitive.
+
+1.Specify a domain
+2.Select a mode.
+3.If necessary, specify a list of subdomains
+4.Enter cookies if necessary.
+
         usage: ess.py [-h] -d DOMAIN -m MODE [-l DOMAIN_LIST] [-c COOKIE]
 
         options:
@@ -62,11 +69,6 @@ An example of running a scan for the `api.hackerone .com` subdomain without usin
 
         sudo docker run --rm --name ess-container -v /home/kali/Desktop/docker_test/externals-scan-script/python3:/application -w /application scan-image ess.py -d hackerone.com -m 2 -l api.hackerone.com
 
-Using the script is extremely simple and intuitive.
-
-1. Choose the mode.
-2. Specify the domain or address scope (depending on the selected mode).
-3. Enter cookies if necessary. If there are no cookies, simply press enter, and scanning will start.
 
 ## Utilities used
 
