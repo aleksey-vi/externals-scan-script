@@ -44,10 +44,10 @@ Installation via this method is standard:
 
 Using the script is extremely simple and intuitive.
 
-1.Specify a domain;<br>
-2.Select a mode;<br>
-3.If necessary, specify a list of subdomains;<br>
-4.Enter cookies if necessary.<br>
+1. Specify a domain;<br>
+2. Select a mode;<br>
+3. If necessary, specify a list of subdomains;<br>
+4. Enter cookies if necessary.<br>
 
         usage: ess.py [-h] -d DOMAIN -m MODE [-l DOMAIN_LIST] [-c COOKIE]
 
