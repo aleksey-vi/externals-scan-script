@@ -25,30 +25,42 @@ Installation via this method is standard:
 
 1. While in the directory with your Dockerfile, execute the command:
 
-        sudo docker build -t your_name .
+        git clone https://github.com/aleksey-vi/externals-scan-script.git
+   
+3. change directory
 
-2. Create and run a new container from the image:
+        cd externals-scan-script
 
-        sudo docker run name/id
+4. Build a new container from the image:
 
-3. Connect to the shell:
+        sudo docker build . -t ess-image
 
-        sudo docker exec -it name/id /bin/bash
+5. Check help:
 
-## Git Clone
-
-This option is straightforward as well.
-
-After cloning the repository, you need to install the required libraries from the `requirements.txt` file.
-
-After that, simply run the script with the command:
+        sudo docker run --rm --name ess-container -v ./python3:/application -w /application ess-image ess.py --help
 
 
 # Usage
 
-Before running the code, uncomment/comment the path to the Nuclei templates in the code, depending on whether you want to use templates from Cent or ProfectDiscovery!!!
+        usage: ess.py [-h] -d DOMAIN -m MODE [-l DOMAIN_LIST] [-c COOKIE]
 
-    python3 ./scan.py
+        options:
+          -h, --help            show this help message and exit
+          -d DOMAIN, --domain DOMAIN
+                        Domain for scanning
+          -m MODE, --mode MODE  Select mode: 1 - scan the entire domain completely, 2
+                        - only a specific scope
+          -l DOMAIN_LIST, --domain-list DOMAIN_LIST
+                        Domain list for scanning(ONLY if use mode 2)
+          -c COOKIE, --cookie COOKIE
+                        Authentication cookie or token
+
+
+# Example
+
+An example of running a scan for the `api.hackerone .com` subdomain without using cookies
+
+        sudo docker run --rm --name ess-container -v /home/kali/Desktop/docker_test/externals-scan-script/python3:/application -w /application scan-image ess.py -d hackerone.com -m 2 -l api.hackerone.com
 
 Using the script is extremely simple and intuitive.
 
