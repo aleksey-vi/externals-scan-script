@@ -45,9 +45,9 @@ RUN go install github.com/xm1k3/cent@latest && \
     go install github.com/tomnomnom/waybackurls@latest
     
 # Clone git repositories
-RUN git clone 'https://github.com/projectdiscovery/nuclei-templates' /nuclei-templates
-    ## && cent init \
-    ## && cent -p cent-nuclei-templates -k
+RUN git clone 'https://github.com/projectdiscovery/nuclei-templates' /nuclei-templates \
+    && cent init \
+    && cent -p cent-nuclei-templates -k
 
 ENTRYPOINT ["python3"]
 
