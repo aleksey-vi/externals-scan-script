@@ -532,7 +532,7 @@ if __name__ == "__main__":
                         type=str,
                         default=None,
                         help="Domain list for scanning(ONLY if use mode 2)",
-                        required=True)
+                        required=False)
     parser.add_argument("-m",
                         "--mode",
                         type=int,
