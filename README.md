@@ -65,7 +65,7 @@ Using the script is extremely simple and intuitive.
 
 # Example
 
-An example of running a scan for the `api.hackerone .com` subdomain without using cookies
+An example of running a scan for the `api.hackerone.com` subdomain without using cookies
 
         sudo docker run --rm --name ess-container -v ./python3:/application -w /application scan-image ess.py -d hackerone.com -m 2 -l api.hackerone.com
 
