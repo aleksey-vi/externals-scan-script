@@ -277,7 +277,7 @@ def run_katana(directory, cookie):
     if not os.path.exists(katana_output_file):
         logger.info("Starting katana")
         #subprocess.run(["katana", "-u", httpx_silent_output_file, "-d", "10", "-jc", "-f", "url", "-ef", "css,png,jpg,gif,mp3,mp4,bmp,ico,svg", "-p", "1", "-c", "5", "-rl", "50", "-kf", "all", "-H", f"Cookie: {cookie}", "-o", katana_output_file])
-        subprocess.run(["katana", "-u", httpx_silent_output_file, "-d", "10", "-jc", "-f", "url", "-silent", "-ef", "css,png,jpg,gif,mp3,mp4,bmp,ico,svg", "-p", "1", "-ct", "500", "-c", "5", "-rl", "50", "-kf", "all", "-H", f"Cookie: {cookie}", "-o", katana_output_file])
+        subprocess.run(["katana", "-u", httpx_silent_output_file, "-d", "10", "-jc", "-f", "url", "-silent", "-ef", "css,png,jpg,gif,mp3,mp4,bmp,ico,svg", "-p", "1", "-ct", "5000", "-c", "5", "-rl", "50", "-kf", "all", "-H", f"Cookie: {cookie}", "-o", katana_output_file])
 
     # запуск утилиты fff
     if not os.path.exists(fff_output_file):
@@ -286,7 +286,7 @@ def run_katana(directory, cookie):
         outfile = open(fff_output_file, "w")
 
         logger.info("Starting fff")
-        subprocess.run(["fff", "-d", "1000", "-x", "http://127.0.0.1:8080", "-H", f"Cookie: {cookie}"], stdin=f, stdout=outfile) 
+        subprocess.run(["fff", "-d", "1000", "-x", "http://localhost:8080", "-H", f"Cookie: {cookie}"], stdin=f, stdout=outfile) 
 
         f.close()
         outfile.close()
@@ -300,8 +300,8 @@ def run_nuclei(directory, cookie):
     open_ports_file = os.path.join(directory, 'open_ports.txt')
     nuclei_output_file_js = os.path.join(directory, 'nuclei.json')
     nuclei_output_file_txt = os.path.join(directory, 'nuclei.txt')
-    nuclei_templates_path = os.path.expanduser('/nuclei-templates/')
-    #nuclei_templates_path = os.path.expanduser('~/cent-nuclei-templates/')
+    #nuclei_templates_path = os.path.expanduser('/nuclei-templates/')
+    nuclei_templates_path = os.path.expanduser('~/cent-nuclei-templates/')
 
     if not os.path.exists(nuclei_templates_path):
         logger.error("nuclei-templates folder not found")
@@ -310,7 +310,7 @@ def run_nuclei(directory, cookie):
 
     if not os.path.exists(nuclei_output_file_txt) or not os.path.exists(nuclei_output_file_js):
         logger.info("Starting nuclei")
-        subprocess.run(["nuclei", "-l", open_ports_file, "-t", nuclei_templates_path, "-H", f"Cookie: {cookie}", "-stats", "-s", "low,medium,high,critical", "-retries", "1", "-rl", "150", "-jle", nuclei_output_file_js, "-o", nuclei_output_file_txt, "-silent"])
+        subprocess.run(["nuclei", "-l", open_ports_file, "-t", nuclei_templates_path, "-H", f"Cookie: {cookie}", "-stats", "-s", "info,low,medium,high,critical", "-retries", "1", "-rl", "150", "-jle", nuclei_output_file_js, "-o", nuclei_output_file_txt, "-silent"])
         
     elif os.path.exists(nuclei_output_file_txt) and os.path.exists(nuclei_output_file_js):
         logger.debug("Skipping nuclei")
@@ -500,7 +500,7 @@ def main(domain, domains, mode, cookie):
 
         subdomain_list = os.path.join(domain_dir, "subdomain_list.txt") # задаем имя файла со списком поддоменов
         # user_input = input("Enter subdomains, separating them with spaces: ") # запрашиваем у пользователя поддомены, разделенные пробелами
-        subdomains = [subdomain.strip() for subdomain in domains.split()] 
+        subdomains = [subdomain.strip() for subdomain in domains] 
 
         if len(subdomains) == 0:
             logger.error(f"subdomains list is empty")
@@ -530,6 +530,7 @@ if __name__ == "__main__":
     parser.add_argument("-l",
                         "--domains",
                         type=str,
+                        nargs='+', 
                         default=None,
                         help="Domain list for scanning(ONLY if use mode 2)",
                         required=False)
@@ -548,4 +549,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(args.domain, args.domains, int(args.mode), args.cookie)
-
