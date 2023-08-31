@@ -19,7 +19,7 @@ WORKDIR /application
 # Update package index and install kali-linux-large without recommended packages
 # Remove junk files and apt cache
 RUN apt-get update \
-    && apt-get -y --no-install-recommends install bind9-dnsutils sudo nmap zip unzip gcc musl-dev \
+    && apt-get -y --no-install-recommends install bind9-dnsutils iputils-ping sudo nmap zip unzip gcc musl-dev \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 COPY ./requirements.txt .
@@ -46,8 +46,7 @@ RUN go install github.com/xm1k3/cent@latest && \
     
 # Clone git repositories
 RUN git clone 'https://github.com/projectdiscovery/nuclei-templates' /nuclei-templates \
-    cent init \
-    cent -p cent-nuclei-templates -k
+    && cent init --overwrite \
+    && cent -p /cent-nuclei-templates -k -t 20
 
 ENTRYPOINT ["python3"]
-
