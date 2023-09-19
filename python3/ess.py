@@ -542,6 +542,7 @@ if __name__ == "__main__":
     parser.add_argument("-c",
                         "--cookie",
                         type=str,
+                        nargs='+',
                         default=None,
                         help="Authentication cookie or token",
                         required=False)
