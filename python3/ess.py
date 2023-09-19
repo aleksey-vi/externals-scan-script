@@ -253,10 +253,10 @@ def run_httpx(directory, cookie):
 
     if not os.path.exists(httpx_output_file):
         logger.info("Starting httpx full")
-        subprocess.run(["httpx", "-l", open_ports_file, "-silent","-H", f"Cookie: {cookie}", "-status-code", "-follow-redirects", "-tech-detect", "-fc", "500,501,502,503,504,505,403,401,404,405,400", "-server", "-websocket", "-ip", "-cname", "-asn", "-cdn", "-location", "-x", "ALL", "-tls-probe", "-o", httpx_output_file])
+        subprocess.run(["httpx", "-l", open_ports_file, "-silent", "-H", f"Cookie: {cookie}", "-status-code", "-follow-redirects", "-tech-detect", "-fc", "500,501,502,503,504,505,403,401,404,405,400", "-server", "-websocket", "-ip", "-cname", "-asn", "-cdn", "-location", "-x", "ALL", "-tls-probe", "-o", httpx_output_file])
         
         logger.info("Starting httpx silent")
-        subprocess.run(["httpx", "-l", open_ports_file, "-silent", "-o", httpx_silent_output_file])
+        subprocess.run(["httpx", "-l", open_ports_file, "-silent", "-H", f"Cookie: {cookie}", "-o", httpx_silent_output_file])
 
     return
 
