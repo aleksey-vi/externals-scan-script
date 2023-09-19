@@ -277,7 +277,7 @@ def run_katana(directory, cookie):
     if not os.path.exists(katana_output_file):
         logger.info("Starting katana")
         #subprocess.run(["katana", "-u", httpx_silent_output_file, "-d", "10", "-jc", "-f", "url", "-ef", "css,png,jpg,gif,mp3,mp4,bmp,ico,svg", "-p", "1", "-c", "5", "-rl", "50", "-kf", "all", "-H", f"Cookie: {cookie}", "-o", katana_output_file])
-        subprocess.run(["katana", "-u", httpx_silent_output_file, "-d", "10", "-jc", "-f", "url", "-silent", "-ef", "css,png,jpg,gif,mp3,mp4,bmp,ico,svg", "-p", "1", "-ct", "5000", "-c", "5", "-rl", "50", "-kf", "all", "-H", f"Cookie: {cookie}", "-o", katana_output_file])
+        subprocess.run(["katana", "-u", httpx_silent_output_file, "-d", "10", "-jc", "-f", "url", "-silent", "-ef", "css,png,jpg,jpeg,gif,mp3,mp4,bmp,ico,svg", "-p", "1", "-ct", "5000", "-c", "5", "-rl", "50", "-kf", "all", "-H", f"Cookie: {cookie}", "-o", katana_output_file])
 
     # запуск утилиты fff
     if not os.path.exists(fff_output_file):
