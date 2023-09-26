@@ -301,7 +301,7 @@ def run_nuclei(directory, cookie):
     nuclei_output_file_js = os.path.join(directory, 'nuclei.json')
     nuclei_output_file_txt = os.path.join(directory, 'nuclei.txt')
     #nuclei_templates_path = os.path.expanduser('/nuclei-templates/')
-    nuclei_templates_path = os.path.expanduser('~/cent-nuclei-templates/')
+    nuclei_templates_path = os.path.expanduser('/cent-nuclei-templates/')
 
     if not os.path.exists(nuclei_templates_path):
         logger.error("nuclei-templates folder not found")
